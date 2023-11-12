@@ -59,6 +59,7 @@ M.my_first_function = function()
     ]], os.getenv("OPENAI_API_KEY"), escape_string(selection))
 
     -- Stream and play the audio directly from the URL
+		print(play_command)
     vim.fn.system(play_command)
 end
 return M
