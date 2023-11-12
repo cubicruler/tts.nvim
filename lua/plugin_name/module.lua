@@ -43,7 +43,7 @@ M.my_first_function = function()
         lines[1] = string.sub(lines[1], start_col+1)
         lines[#lines] = string.sub(lines[#lines], 1, end_col)
     end
-    local selection = table.concat(lines, " \\ ") -- conact paragraphs, shell style
+    local selection = table.concat(lines, " ") -- conact paragraphs w/o newlines
 
     -- Fetch the link using the visual selection
 		local play_command = string.format([[ curl -s https://api.openai.com/v1/audio/speech -H "Authorization: Bearer %s" -H "Content-Type: application/json" -d '{ "model": "tts-1", "input": "%s", "voice": "echo", "response_format": "opus" }' | play -q -t opus - ]], os.getenv("OPENAI_API_KEY"), escape_string(selection))
