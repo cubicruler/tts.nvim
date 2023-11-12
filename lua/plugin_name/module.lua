@@ -46,17 +46,7 @@ M.my_first_function = function()
     local selection = table.concat(lines, "\n")
 
     -- Fetch the link using the visual selection
-		local play_command = string.format([[ 
-		curl https://api.openai.com/v1/audio/speech \
-				-H "Authorization: Bearer %s" \
-				-H "Content-Type: application/json" \
-				-d '{
-								"model": "tts-1",
-								"input": "%s",
-								"voice": "echo"
-				    }' \ 
-    | play -t mp3 -
-    ]], os.getenv("OPENAI_API_KEY"), escape_string(selection))
+		local play_command = string.format([[ curl -s https://api.openai.com/v1/audio/speech -H "Authorization: Bearer %s" -H "Content-Type: application/json" -d '{ "model": "tts-1", "input": "%s", "voice": "echo", "response_format": "opus" }' | play -q -t opus - ]], os.getenv("OPENAI_API_KEY"), escape_string(selection))
 
     -- Stream and play the audio directly from the URL
 		print(play_command)
